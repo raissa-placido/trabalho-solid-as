@@ -88,10 +88,10 @@ class ProdutoView(View):
 
         if acao_form == 'Inclusão':
             self.service.incluir(
+                form_data['categoria_id'],
                 form_data['descricao'],
                 form_data['preco_unitario'],
                 form_data['quantidade_estoque'],
-                form_data['categoria_id'],
             )
         elif acao_form == 'Exclusão':
             self.service.excluir(form_data['id'])

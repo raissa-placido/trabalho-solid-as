@@ -61,6 +61,7 @@ class CategoriaService:
 class ProdutoService:
     def __init__(self):
         self.conexao_bd = ConexaoDB()
+        self.categoria_service = CategoriaService()
 
     def listar(self):
         conexao = self.conexao_bd.obter_conexao()
@@ -82,13 +83,7 @@ class ProdutoService:
             conexao.close()
 
     def listar_categorias(self):
-        conexao = self.conexao_bd.obter_conexao()
-        try:
-            return conexao.cursor().execute(
-                "SELECT id, descricao FROM Categoria ORDER BY descricao"
-            ).fetchall()
-        finally:
-            conexao.close()
+        return self.categoria_service.listar()
 
     def buscar_por_id(self, id):
         conexao = self.conexao_bd.obter_conexao()
@@ -110,7 +105,7 @@ class ProdutoService:
         finally:
             conexao.close()
 
-    def incluir(self, descricao, preco_unitario, quantidade_estoque, categoria_id):
+    def incluir(self, categoria_id, descricao, preco_unitario, quantidade_estoque):
         conexao = self.conexao_bd.obter_conexao()
         try:
             conexao.cursor().execute(
