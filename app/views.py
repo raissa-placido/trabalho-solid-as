@@ -42,7 +42,7 @@ class CategoriaView(View):
         else:
             self.service.alterar(form_data['id'], form_data['descricao'])
 
-        return HttpResponseRedirect(reverse("categorias"))
+        return HttpResponseRedirect('/categorias/')
 
 
 class ProdutoView(View):
@@ -104,7 +104,7 @@ class ProdutoView(View):
                 form_data['categoria_id'],
             )
 
-        return HttpResponseRedirect(reverse("produtos"))
+        return HttpResponseRedirect('/produtos/')
 
 
 def home(request):
