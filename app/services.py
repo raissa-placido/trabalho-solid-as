@@ -82,8 +82,8 @@ class ProdutoService:
         finally:
             conexao.close()
 
-    def listar_categorias(self):
-        return self.categoria_service.listar()
+    #def listar_categorias(self):
+    #    return self.categoria_service.listar()
 
     def buscar_por_id(self, id):
         conexao = self.conexao_bd.obter_conexao()

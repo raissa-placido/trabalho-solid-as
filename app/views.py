@@ -35,12 +35,15 @@ class CategoriaView(View):
         form_data = request.POST
         acao_form = form_data['acao']
 
-        if acao_form == 'Inclusão':
-            self.service.incluir(form_data['descricao'])
-        elif acao_form == 'Exclusão':
-            self.service.excluir(form_data['id'])
-        else:
-            self.service.alterar(form_data['id'], form_data['descricao'])
+        try:
+            if acao_form == 'Inclusão':
+                self.service.incluir(form_data['descricao'])
+            elif acao_form == 'Exclusão':
+                self.service.excluir(form_data['id'])
+            else:
+                self.service.alterar(form_data['id'], form_data['descricao'])
+        except Exception as err:
+            return render(request, 'home.html', context={'ERRO': err})
 
         return HttpResponseRedirect('/categorias/')
 
@@ -51,7 +54,9 @@ class ProdutoView(View):
         self.service = ProdutoService()
 
     def _choices(self):
-        categorias = self.service.listar_categorias()
+        #categorias = self.service.listar_categorias()
+        categorias = CategoriasService().listar()
+
         return [(c[0], c[1]) for c in categorias]
 
     def _form_com_dados(self, registro):
