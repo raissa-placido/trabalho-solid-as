@@ -55,7 +55,7 @@ class ProdutoView(View):
 
     def _choices(self):
         #categorias = self.service.listar_categorias()
-        categorias = CategoriasService().listar()
+        categorias = CategoriaService().listar()
 
         return [(c[0], c[1]) for c in categorias]
 
